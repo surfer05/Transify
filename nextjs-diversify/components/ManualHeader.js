@@ -1,7 +1,8 @@
 // This file is to show what making a connect button looks like behind the scenes!
-
-import { useEffect } from "react";
+import classes from "../styles/Header.module.css";
+import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
+import { useRef } from "react";
 
 // Top navbar
 export default function ManualHeader() {
@@ -39,12 +40,37 @@ export default function ManualHeader() {
     });
   }, []);
 
+  const inputRef = useRef();
+  const [error, setError] = useState(false);
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    const inputSwaploss = inputRef.current.value;
+    console.log(inputSwaploss);
+    if (inputSwaploss > 100 || inputSwaploss < 0) {
+      setError(true);
+      return;
+    } else {
+      setError(false);
+    }
+  };
+
   return (
     <nav className="p-5 border-b-2">
-      <ul className="">
-        <li className="flex flex-row">
+      <ul className={classes.list}>
+        <li className={classes.swaploss}>
+          <form onSubmit={formSubmitHandler} className={classes.form}>
+            <div className={classes.inputFields}>
+              <input ref={inputRef} type="number" placeholder="Swaploss (%)" />
+              <button type="submit" className={classes.button}>
+                Submit
+              </button>
+            </div>
+            {error && <p style={{ color: "red" }}>Specify between 0 and 100</p>}
+          </form>
+        </li>
+        <li className={"flex flex-row"}>
           {account ? (
-            <div className="ml-auto py-2 px-4">
+            <div className="ml-auto py-2 px-4 text-white">
               Connected to {account.slice(0, 6)}...
               {account.slice(account.length - 4)}
             </div>
@@ -64,7 +90,7 @@ export default function ManualHeader() {
               disabled={isWeb3EnableLoading}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-auto"
             >
-              Connect
+              Connect Wallet
             </button>
           )}
         </li>
