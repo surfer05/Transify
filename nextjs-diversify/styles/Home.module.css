@@ -1,29 +1,36 @@
 .container {
   padding: 0 2rem;
-  /* background-color: brown; */
+  background-color: black;
   min-height: 100vh;
-  /* position: relative; */
+  position: relative;
 }
-/* .container::after {
+.container::after {
   content: "";
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 500px;
   position: absolute;
+  background-color: #111;
   left: 60%;
-  top: 50%;
-  background: transparent;
+  top: 10%;
+  border-radius: 50%;
+  filter: blur(150px);
 }
 .container::before {
   content: "";
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 500px;
+  background-color: white;
   position: absolute;
   left: 20%;
-  top: 20%;
-} */
+  top: 30%;
+  border-radius: 50%;
+  filter: blur(150px);
+}
 .coinAndSwap {
   display: flex;
+  flex-wrap: wrap;
   gap: 2em;
+  align-items: center;
 }
 .main {
   min-height: 100vh;
@@ -150,7 +157,7 @@
     filter: invert(1);
   }
 }
-@media screen and (max-width: 730px) {
+@media screen and (max-width: 940px) {
   .coinAndSwap {
     flex-direction: column;
   }

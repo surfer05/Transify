@@ -3,19 +3,43 @@
   flex-direction: column;
   gap: 1em;
   flex: 0.7;
-}
-/* .tableHeader {
+  margin-top: 1em;
+  position: relative;
   color: white;
-} */
-.row,
+  width: 100%;
+}
+.coinList::after {
+  content: "";
+  width: 2px;
+  height: 110%;
+  position: absolute;
+  left: 102%;
+  background-color: white;
+}
+.coinList th {
+  text-align: left;
+}
+.coinList tr {
+  margin: 1em 0;
+}
+.coinList table {
+  font-weight: 500;
+}
+.coinList th,
+.row td {
+  font-weight: 5500;
+  font-size: 1.5em;
+  padding: 1em 0;
+}
 .tableHeader {
   display: flex;
   justify-content: space-between;
 }
-.tableHeader div {
+
+/* .tableHeader div {
   font-weight: 700;
   font-size: 1.3em;
-}
+} */
 .inputAndBtn {
   display: flex;
   flex-direction: column;
@@ -27,12 +51,18 @@
   background-color: #ccc;
   outline: none;
   padding: 0.2em 1em;
+  color: black;
+  font-size: 1.3em;
+  font-weight: 550;
 }
 .inputAndBtn > input:focus {
   outline: 1px solid black;
 }
 .swap {
   flex: 0.3;
+  width: 100%;
+  color: white;
+  text-align: center;
 }
 .swap h1 {
   font-weight: 900;
@@ -40,22 +70,25 @@
   margin: 0.5em 0;
 }
 .inputAndBtn button {
-  background-color: seashell;
-  border: 1px solid aliceblue;
   align-self: center;
   padding: 0.3em 1em;
   transition: all 0.3s ease;
+  font-size: 1.2em;
+  font-weight: 600;
+  border-radius: 5px;
+  color: black;
+  background-color: white;
 }
 .inputAndBtn button:hover {
-  background-color: green;
-  border: 2px solid aliceblue;
+  color: black;
+  background-color: azure;
 }
 .icon {
   display: flex;
   gap: 0.3em;
 }
 .row div:nth-child(2) {
-  margin-right: 3em;
+  margin-right: 7em;
 }
 .row div:nth-child(3) {
   margin-right: 4em;
@@ -69,4 +102,12 @@
 
 .coinList li:nth-child(3) div:nth-child(2) {
   margin-left: 0.8em;
+}
+@media screen and (max-width: 940px) {
+  .coinList::after {
+    left: 0;
+    bottom: -10%;
+    width: 100%;
+    height: 2px;
+  }
 }
