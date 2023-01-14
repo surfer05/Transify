@@ -1,0 +1,72 @@
+.coinList {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  flex: 0.7;
+}
+/* .tableHeader {
+  color: white;
+} */
+.row,
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+}
+.tableHeader div {
+  font-weight: 700;
+  font-size: 1.3em;
+}
+.inputAndBtn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  justify-content: center;
+  margin: 0.2em 1em;
+}
+.inputAndBtn > input {
+  background-color: #ccc;
+  outline: none;
+  padding: 0.2em 1em;
+}
+.inputAndBtn > input:focus {
+  outline: 1px solid black;
+}
+.swap {
+  flex: 0.3;
+}
+.swap h1 {
+  font-weight: 900;
+  font-size: 1.5em;
+  margin: 0.5em 0;
+}
+.inputAndBtn button {
+  background-color: seashell;
+  border: 1px solid aliceblue;
+  align-self: center;
+  padding: 0.3em 1em;
+  transition: all 0.3s ease;
+}
+.inputAndBtn button:hover {
+  background-color: green;
+  border: 2px solid aliceblue;
+}
+.icon {
+  display: flex;
+  gap: 0.3em;
+}
+.row div:nth-child(2) {
+  margin-right: 3em;
+}
+.row div:nth-child(3) {
+  margin-right: 4em;
+}
+.profit {
+  color: green;
+}
+.loss {
+  color: red;
+}
+
+.coinList li:nth-child(3) div:nth-child(2) {
+  margin-left: 0.8em;
+}
