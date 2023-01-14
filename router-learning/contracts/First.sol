@@ -14,6 +14,8 @@ contract MyContract is ERC1155, ICrossTalkApplication {
 
     mapping(address => uint) public maxLossBearable;
 
+    receive() external payable {}
+
     function setNewMaxLossBreareable(uint _percent) public returns (bool) {
         //setting the percentage to be set
         maxLossBearable[msg.sender] = _percent;
@@ -44,10 +46,10 @@ contract MyContract is ERC1155, ICrossTalkApplication {
         require(msg.value >= amount, "insufficient tokens"); //msg.value is the value transferred
         amount = msg.value;
         uint128 modifiedRatio = ratiosX1000[chainType][chainId];
-        uint tokenToBeTransferred = (amount * modifiedRatio ) / 1000;
+        uint tokenToBeTransferred = (amount * modifiedRatio) / 1000;
 
         TransferParams memory transferparams = TransferParams(
-            receipientAddress, 
+            receipientAddress,
             tokenToBeTransferred
         );
         bytes memory payload = abi.encode(transferparams); //making payload
@@ -184,6 +186,5 @@ contract MyContract is ERC1155, ICrossTalkApplication {
         uint64 eventIdentifier,
         bool[] memory execFlags,
         bytes[] memory execData
-    ) external view override{}
+    ) external view override {}
 }
-

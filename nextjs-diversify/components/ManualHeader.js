@@ -5,7 +5,7 @@ import { useMoralis } from "react-moralis";
 import { useRef } from "react";
 
 // Top navbar
-export default function ManualHeader() {
+export default function ManualHeader(props) {
   const {
     enableWeb3,
     isWeb3Enabled,
@@ -46,12 +46,14 @@ export default function ManualHeader() {
     event.preventDefault();
     const inputSwaploss = inputRef.current.value;
     console.log(inputSwaploss);
+    inputRef.current.value = "";
     if (inputSwaploss > 100 || inputSwaploss < 0) {
       setError(true);
       return;
     } else {
       setError(false);
     }
+    props.onAddSwapLoss(inputSwaploss);
   };
 
   return (

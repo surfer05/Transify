@@ -1,6 +1,8 @@
 .swaploss input {
+  background-color: #bbb;
   outline: none;
   padding: 0.5em 1em;
+  border-radius: 10px;
 }
 .swaploss input:hover {
   outline: 1px solid black;
@@ -11,6 +13,7 @@
   border-radius: 10px;
   padding: 0 1em;
   transition: all 0.3s ease-in-out;
+  background-color: #bbb;
 }
 .form {
   display: flex;
