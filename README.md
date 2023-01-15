@@ -27,9 +27,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+  <!-- <a href="https://github.com/github_username/repo_name">
+    <img src="images/" alt="Logo" width="80" height="80">
+  </a> -->
 
 <h3 align="center">Transify</h3>
 
@@ -39,7 +39,7 @@
     <a href="https://github.com/surfer05/Transify"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://youtu.be/2i8QUZpfKK4">View Demo</a>
     ·
 
 </div>
