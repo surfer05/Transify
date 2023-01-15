@@ -15,7 +15,7 @@ const CoinData = (props) => {
           res.id == "avalanche-2"
         );
       });
-      getData[2].market_data.price_change_percentage_24h = 3.08;
+
       setRequiredData(getData);
     }
   }, [response]);
@@ -33,14 +33,7 @@ const CoinData = (props) => {
     />
   ));
   return (
-    // <ul className={styles.coinList}>
-    //   <li className={styles.tableHeader}>
-    //     <div>Name</div>
-    //     <div>Profit/Loss</div>
-    //     <div>No. of coins</div>
-    //   </li>
-    //   {tableRow}
-    // </ul>
+
     <div className={styles.coinList}>
       <table>
         <thead>

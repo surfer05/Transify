@@ -81,12 +81,10 @@ TransiFy is the protocol that provides one swap transfer of tokens from one chai
 
 ### Built With
 
-- [![Router][router.com]][https://www.routerprotocol.com/]
-- [![Hardhat][hardhat.org]][https://hardhat.org/]
-- [![Ethereum][ethereum.org]][https://ethereum.org/en/]
-- [![Next][next.js]][next-url]
-- [![React][react.js]][react-url]
-- [![Bootstrap][bootstrap.com]][bootstrap-url]
+- [https://www.routerprotocol.com/]
+- [https://hardhat.org/]
+- [https://ethereum.org/en/]
+- [https://nextjs.org/]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -117,9 +115,6 @@ This is an example of how to list things you need to use the software and how to
    ```
 3. Have a hands-on experience on our project.
 
-   ```
-
-   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

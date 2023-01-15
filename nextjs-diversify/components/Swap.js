@@ -8,26 +8,15 @@ import { ethers } from "ethers";
 
 const Swap = (props) => {
   const [inputSwaploss,setInputSwapLoss] = useState();
-  const inputRef = useRef();
+
   const [error, setError] = useState(false);
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    setInputSwapLoss(inputRef.current.value);
-    // console.log(inputSwaploss);
-    // props.onAddSwaploss(inputSwaploss);
-    inputRef.current.value = "";
-    if (inputSwaploss < 0) {
-      setError(true);
-      return;
-    } else {
-      setError(false);
-    }
   };
   const { Moralis, isWeb3Enabled, chainId: chainIdHex } = useMoralis();
   const chainId = parseInt(chainIdHex);
   const contractAddress =
     chainId in contractAddresses ? contractAddresses[chainId][0] : null;
-  console.log(contractAddress);
   const swapLoss = props.swapLoss;
   const { runContractFunction: setNewMaxLossBreareable } = useWeb3Contract({
     abi: abi,
@@ -47,7 +36,6 @@ const Swap = (props) => {
       ratioX1000: 11,
     },
   });
-console.log(inputSwaploss)
 
   const {
     runContractFunction: transferTokens,
@@ -57,11 +45,11 @@ console.log(inputSwaploss)
     abi: abi,
     contractAddress: contractAddress,
     functionName: "transferTokens",
-    msgValue: 10000000000000000,
+    msgValue: inputSwaploss,
     params: {
       chainType: 0,
       chainId: "43113",
-      amount: "10000000000000000",
+      amount: "100000000000000",
       receipientAddress: "0x9299eac94952235Ae86b94122D2f7c77F7F6Ad30",
       destGasPrice: "30000000000",
     },
@@ -87,9 +75,13 @@ console.log(inputSwaploss)
     );
   }
 
+  const inputChangeHandler = (e) => {
+    setInputSwapLoss(e.target.value)
+  }
+
   return (
     <div className={classes.swap}>
-      <h1>Swap</h1>
+      <h1>Most Profitable</h1>
       <div className={classes.inputAndBtn}>
         {max != [] && max.map((max) => ( <input
           type="text"
@@ -99,9 +91,9 @@ console.log(inputSwaploss)
           } by ${max.market_data.price_change_percentage_24h.toFixed(2)} %`}
         ></input>))}
      
-         <form onSubmit={formSubmitHandler} className={classes.form}>
+         <form className={classes.form} onSubmit={formSubmitHandler}>
           <div className={classes.inputFields}>
-            <input ref={inputRef} type="number" placeholder="Amount to swap" />
+            <input onChange={inputChangeHandler} value={inputSwaploss} type="number" placeholder="Amount to swap" />
             <button
         type="submit" 
           className={classes.button}
@@ -123,7 +115,7 @@ console.log(inputSwaploss)
           )}
         </button>
           </div>
-          {error && <p style={{ color: "red" }}>Specify between 0 and 100</p>}
+          {/* {error && <p style={{ color: "red" }}>Specify between 0 and 100</p>} */}
         </form>
       </div>
     </div>
