@@ -40,36 +40,10 @@ export default function ManualHeader(props) {
     });
   }, []);
 
-  const inputRef = useRef();
-  const [error, setError] = useState(false);
-  const formSubmitHandler = (event) => {
-    event.preventDefault();
-    const inputSwaploss = inputRef.current.value;
-    console.log(inputSwaploss);
-    inputRef.current.value = "";
-    if (inputSwaploss > 100 || inputSwaploss < 0) {
-      setError(true);
-      return;
-    } else {
-      setError(false);
-    }
-    props.onAddSwapLoss(inputSwaploss);
-  };
-
   return (
-    <nav className="p-5 border-b-2">
+    <nav className="p-5">
       <ul className={classes.list}>
-        <li className={classes.swaploss}>
-          <form onSubmit={formSubmitHandler} className={classes.form}>
-            <div className={classes.inputFields}>
-              <input ref={inputRef} type="number" placeholder="Swaploss (%)" />
-              <button type="submit" className={classes.button}>
-                Submit
-              </button>
-            </div>
-            {error && <p style={{ color: "red" }}>Specify between 0 and 100</p>}
-          </form>
-        </li>
+        <li className={classes.logo}>TRANSIFY</li>
         <li className={"flex flex-row"}>
           {account ? (
             <div className="ml-auto py-2 px-4 text-white">

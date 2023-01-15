@@ -1,19 +1,14 @@
-.swaploss input {
-  background-color: #bbb;
-  outline: none;
-  padding: 0.5em 1em;
-  border-radius: 10px;
-}
-.swaploss input:hover {
-  outline: 1px solid black;
-}
 .button {
   color: black;
   background-color: white;
   border-radius: 10px;
   padding: 0 1em;
   transition: all 0.3s ease-in-out;
-  background-color: #bbb;
+}
+.logo {
+  color: white;
+  font-size: 1.5em;
+  font-weight: 700;
 }
 .form {
   display: flex;

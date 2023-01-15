@@ -2,11 +2,27 @@ import classes from "../styles/CoinData.module.css";
 import { contractAddresses, abi } from "../constants";
 // dont export from moralis when using react
 import { useMoralis, useWeb3Contract } from "react-moralis";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNotification } from "@web3uikit/core";
 import { ethers } from "ethers";
 
 const Swap = (props) => {
+  const [inputSwaploss,setInputSwapLoss] = useState();
+  const inputRef = useRef();
+  const [error, setError] = useState(false);
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    setInputSwapLoss(inputRef.current.value);
+    // console.log(inputSwaploss);
+    // props.onAddSwaploss(inputSwaploss);
+    inputRef.current.value = "";
+    if (inputSwaploss < 0) {
+      setError(true);
+      return;
+    } else {
+      setError(false);
+    }
+  };
   const { Moralis, isWeb3Enabled, chainId: chainIdHex } = useMoralis();
   const chainId = parseInt(chainIdHex);
   const contractAddress =
@@ -31,6 +47,7 @@ const Swap = (props) => {
       ratioX1000: 11,
     },
   });
+console.log(inputSwaploss)
 
   const {
     runContractFunction: transferTokens,
@@ -40,7 +57,7 @@ const Swap = (props) => {
     abi: abi,
     contractAddress: contractAddress,
     functionName: "transferTokens",
-    msgValue: "10000000000000000",
+    msgValue: 10000000000000000,
     params: {
       chainType: 0,
       chainId: "43113",
@@ -58,14 +75,36 @@ const Swap = (props) => {
       console.log(error);
     }
   };
+
+  let max = [];
+  if (props.data) {
+    const priceData = props.data.map((data) => {
+      return data.market_data.price_change_percentage_24h;
+    });
+    const maxPrice = Math.max(priceData[0], priceData[1], priceData[2]);
+    max = props.data.filter(
+      (data) => data.market_data.price_change_percentage_24h == maxPrice
+    );
+  }
+
   return (
     <div className={classes.swap}>
       <h1>Swap</h1>
       <div className={classes.inputAndBtn}>
-        <input type="text" disabled value="polygon 5% up"></input>
-        <input type="text" disabled value="avalanche 3% up"></input>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-auto"
+        {max != [] && max.map((max) => ( <input
+          type="text"
+          disabled
+          value={`${max.name} ${
+            max.market_data.price_change_percentage_24h > 0 ? "up" : "down"
+          } by ${max.market_data.price_change_percentage_24h.toFixed(2)} %`}
+        ></input>))}
+     
+         <form onSubmit={formSubmitHandler} className={classes.form}>
+          <div className={classes.inputFields}>
+            <input ref={inputRef} type="number" placeholder="Amount to swap" />
+            <button
+        type="submit" 
+          className={classes.button}
           onClick={async () => {
             await Moralis.enableWeb3();
             await transferTokens({
@@ -83,6 +122,9 @@ const Swap = (props) => {
             "Swap"
           )}
         </button>
+          </div>
+          {error && <p style={{ color: "red" }}>Specify between 0 and 100</p>}
+        </form>
       </div>
     </div>
   );

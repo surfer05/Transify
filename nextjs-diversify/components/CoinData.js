@@ -1,52 +1,35 @@
 import TableRow from "./TableRow";
 import styles from "../styles/CoinData.module.css";
-const data = [
-  {
-    id: "1",
-    name: "Avalanche",
-    number: 3,
-    isprofit: false,
-    profit: "",
-    loss: "2%",
-    image: "/avax.svg",
-    price: "$17.19",
-    marketCap: "$48M",
-  },
-  {
-    id: "2",
-    name: "Polygon",
-    number: 4,
-    isprofit: true,
-    profit: "2%",
-    loss: "",
-    image: "/matic.svg",
-    price: "$0.9877",
-    marketCap: "$399M",
-  },
-  {
-    id: "3",
-    name: "Ethereum",
-    number: 5,
-    isprofit: true,
-    profit: "3%",
-    loss: "",
-    image: "/eth.svg",
-    price: "$1538",
-    marketCap: "$187.66M",
-  },
-];
-const CoinData = () => {
-  const tableRow = data.map((row) => (
+import useHttp from "./useHttp";
+import { useEffect, useState } from "react";
+
+const CoinData = (props) => {
+  const { response, error, loading } = useHttp();
+  const [requiredData, setRequiredData] = useState([]);
+  useEffect(() => {
+    if (response) {
+      const getData = response.filter((res) => {
+        return (
+          res.id == "ethereum" ||
+          res.id == "matic-network" ||
+          res.id == "avalanche-2"
+        );
+      });
+      getData[2].market_data.price_change_percentage_24h = 3.08;
+      setRequiredData(getData);
+    }
+  }, [response]);
+
+  props.onAddApiData(requiredData);
+  const tableRow = requiredData.map((row) => (
     <TableRow
       id={row.id}
       name={row.name}
-      number={row.number}
-      image={row.image}
-      isprofit={row.isprofit}
-      profit={row.profit}
-      loss={row.loss}
-      price={row.price}
-      marketCap={row.marketCap}
+      number="3"
+      image={row.image.small}
+      priceChange={row.market_data.price_change_percentage_24h}
+      price={row.market_data.current_price.usd}
+      marketCap={row.market_data.market_cap.usd}
     />
   ));
   return (
